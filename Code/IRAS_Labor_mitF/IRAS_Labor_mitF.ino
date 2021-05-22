@@ -101,11 +101,11 @@ void setup() {
     myFile.print(" ; ");
     myFile.println(F("Oz [°]"));
     myFile.close();
-  }
+  }/*
   else {
     Serial.println(F("error opening Messwerte.csv"));
     while (1);
-  }
+  }*/
   
   Serial.print("t [ms]");
   Serial.print("\t");
@@ -154,7 +154,6 @@ void loop() {
  if (event.light) // falls Helligkeit gemessen wurde, dann…
  {
  Serial.print(event.light);
- Serial.print("lux");
  }
  else
  {
@@ -167,6 +166,7 @@ void loop() {
 /* Beschleunigungssensor */
  accel.read(); // wertet die Daten des Beschleunigungssensors aus
  gyro.read(); //wertet die Daten des Gyroskops aus
+ orient.read();
  accel_mag = sqrt(accel.x*accel.x+accel.y*accel.y+accel.z*accel.z);
  
 //Berechnet den Betrag der Gesamtbeschleunigung
@@ -176,7 +176,7 @@ void loop() {
  Serial.print("\t");
  Serial.print(accel.z);
  Serial.print("\t");
- Serial.println(accel_mag);
+ Serial.print(accel_mag);
  Serial.print("\t");
  Serial.print(gyro.x);
  Serial.print("\t");
@@ -224,10 +224,10 @@ void loop() {
  myFile.close();
  Serial.println(F("Done"));
  }
- else {
+ /*else {
  Serial.println(F("error opening Messwerte.csv"));
  while(1);
- }
+ }*/
  delay(50);
 }
 /* Ende Loop-Funktion */
