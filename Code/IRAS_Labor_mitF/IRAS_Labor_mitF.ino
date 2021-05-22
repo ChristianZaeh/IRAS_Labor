@@ -125,12 +125,12 @@ void setup() {
   Serial.print("\t");
   Serial.print("Ry [1/s^2]");
   Serial.print("\t");
-  Serial.print("Rz [1/s^^]");
+  Serial.print("Rz [1/s^2]");
   Serial.print("\t");
   Serial.print("Ox [°]");
-  Serial.print("\t");
+  Serial.print("\t\t");
   Serial.print("Oy [°]");
-  Serial.print("\t");
+  Serial.print("\t\t");
   Serial.println("Oz [°]");
 }
 /* Ende der Setup-Funktion */
@@ -171,25 +171,25 @@ void loop() {
  
 //Berechnet den Betrag der Gesamtbeschleunigung
  Serial.print(accel.x);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(accel.y);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(accel.z);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(accel_mag);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(gyro.x);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(gyro.y);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(gyro.z);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(orient.roll);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(orient.pitch);
- Serial.print("\t");
+ Serial.print("\t\t");
  Serial.print(orient.heading);
- Serial.println("\t");
+ Serial.println("\t\t");
  delay(100);
 
 /* SD - Kartensensor */
