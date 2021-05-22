@@ -37,7 +37,7 @@ Magnetic mag; // erzeugt ein neues Objekt "mag" vom Typ
 Orientation orient(accel,mag); // erzeugt ein neues Objekt "orient" vom
  // Typ Orientation mit zwei Inputs (IMU)
 
-Gyro gyro; //erzeugt ein neues Objekt "gyro"vom Typ Gyro
+Gyro gyro; //erzeugt ein neues Objekt "gyro" vom Typ Gyro
 /* Deklariere Variablen */
 //float distance; // erzeugt eine Fließkommavariable "distance" vom Typ float
 float accel_mag;
@@ -73,8 +73,35 @@ void setup() {
  orient.begin(); //startet Orientierung
  gyro.begin(); //startet Gyroskop
 
-   myFile = SD.open(F("Messwerte.csv"), FILE_WRITE);
+  Serial.print("t [ms]");
+  Serial.print("\t");
+  Serial.print("D [cm]");
+  Serial.print("\t");
+  Serial.print("L [lux]");
+  Serial.print("\t");
+  Serial.print("Ax [m/s^2]");
+  Serial.print("\t");
+  Serial.print("Ay [m/s^2]");
+  Serial.print("\t");
+  Serial.print("Az [m/s^2]");
+  Serial.print("\t");
+  Serial.print("As [m/s^2]");
+  Serial.print("\t");
+  Serial.print("Rx [1/s^2]");
+  Serial.print("\t");
+  Serial.print("Ry [1/s^2]");
+  Serial.print("\t");
+  Serial.print("Rz [1/s^2]");
+  Serial.print("\t");
+  Serial.print("Ox [°]");
+  Serial.print("\t\t");
+  Serial.print("Oy [°]");
+  Serial.print("\t\t");
+  Serial.println("Oz [°]");
+
+myFile = SD.open("MWERTE.csv", FILE_WRITE);
   if (myFile) {
+    Serial.print("Writing to MWERTE.csv...");
     myFile.print(F("t [ms]"));
     myFile.print(" ; ");
     myFile.print(F("D [cm]"));
@@ -101,37 +128,13 @@ void setup() {
     myFile.print(" ; ");
     myFile.println(F("Oz [°]"));
     myFile.close();
-  }/*
+  }
   else {
-    Serial.println(F("error opening Messwerte.csv"));
+    Serial.println(F("error opening MWERTE.csv"));
     while (1);
-  }*/
+  }
   
-  Serial.print("t [ms]");
-  Serial.print("\t");
-  Serial.print("D [cm]");
-  Serial.print("\t");
-  Serial.print("L [lux]");
-  Serial.print("\t");
-  Serial.print("Ax [m/s^2]");
-  Serial.print("\t");
-  Serial.print("Ay [m/s^2]");
-  Serial.print("\t");
-  Serial.print("Az [m/s^2]");
-  Serial.print("\t");
-  Serial.print("As [m/s^2]");
-  Serial.print("\t");
-  Serial.print("Rx [1/s^2]");
-  Serial.print("\t");
-  Serial.print("Ry [1/s^2]");
-  Serial.print("\t");
-  Serial.print("Rz [1/s^2]");
-  Serial.print("\t");
-  Serial.print("Ox [°]");
-  Serial.print("\t\t");
-  Serial.print("Oy [°]");
-  Serial.print("\t\t");
-  Serial.println("Oz [°]");
+
 }
 /* Ende der Setup-Funktion */
 
@@ -193,41 +196,42 @@ void loop() {
  delay(100);
 
 /* SD - Kartensensor */
- myFile = SD.open(F("Messwerte.csv"), FILE_WRITE);
+
+myFile = SD.open("MWERTE.csv", FILE_WRITE);
  if (myFile) {
- Serial.print(F("Writing to Messwerte.csv..."));
- myFile.print(millis());
- myFile.print(" ; ");
- myFile.print(sr04.Distance());
- myFile.print(" ; ");
- myFile.print(event.light);
- myFile.print(" ; ");
- myFile.print(accel.x);
- myFile.print(" ; ");
- myFile.print(accel.y);
- myFile.print(" ; ");
- myFile.print(accel.z);
- myFile.print(" ; ");
- myFile.print(accel_mag);
- myFile.print(" ; ");
- myFile.print(gyro.x);
- myFile.print(" ; ");
- myFile.print(gyro.y);
- myFile.print(" ; ");
- myFile.print(gyro.z);
- myFile.print(" ; ");
- myFile.print(orient.roll);
- myFile.print(" ; ");
- myFile.print(orient.pitch);
- myFile.print(" ; ");
- myFile.println(orient.heading);
- myFile.close();
- Serial.println(F("Done"));
+   Serial.print("Writing to MWERTE.csv...");
+   myFile.print(millis());
+   myFile.print(" ; ");
+   myFile.print(sr04.Distance());
+   myFile.print(" ; ");
+   myFile.print(event.light);
+   myFile.print(" ; ");
+   myFile.print(accel.x);
+   myFile.print(" ; ");
+   myFile.print(accel.y);
+   myFile.print(" ; ");
+   myFile.print(accel.z);
+   myFile.print(" ; ");
+   myFile.print(accel_mag);
+   myFile.print(" ; ");
+   myFile.print(gyro.x);
+   myFile.print(" ; ");
+   myFile.print(gyro.y);
+   myFile.print(" ; ");
+   myFile.print(gyro.z);
+   myFile.print(" ; ");
+   myFile.print(orient.roll);
+   myFile.print(" ; ");
+   myFile.print(orient.pitch);
+   myFile.print(" ; ");
+   myFile.println(orient.heading);
+   myFile.close();
+   Serial.println(F("Done"));
  }
- /*else {
- Serial.println(F("error opening Messwerte.csv"));
- while(1);
- }*/
+ else {
+  Serial.println(F("error opening MWERTE.csv"));
+  while(1);
+ }
  delay(50);
 }
 /* Ende Loop-Funktion */
