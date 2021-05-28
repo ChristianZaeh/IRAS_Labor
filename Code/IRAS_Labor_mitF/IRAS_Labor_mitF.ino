@@ -41,6 +41,7 @@ Gyro gyro; //erzeugt ein neues Objekt "gyro" vom Typ Gyro
 /* Deklariere Variablen */
 //float distance; // erzeugt eine Fließkommavariable "distance" vom Typ float
 float accel_mag;
+float accel_max = 0;
 
 
 /* Starte das Setup */
@@ -87,6 +88,8 @@ void setup() {
   Serial.print("\t");
   Serial.print("As [m/s^2]");
   Serial.print("\t");
+  Serial.print("Am [m/s^2]");
+  Serial.print("\t");
   Serial.print("Rx [1/s^2]");
   Serial.print("\t");
   Serial.print("Ry [1/s^2]");
@@ -115,6 +118,8 @@ myFile = SD.open("MWERTE.csv", FILE_WRITE);
     myFile.print(F("Az [m/s^2]"));
     myFile.print(" ; ");
     myFile.print("As[m/s^2]");
+    myFile.print("  ;");
+    myFile.print("Am[m/s^2]");
     myFile.print("  ;");
     myFile.print(F("Rx [1/s^2]"));
     myFile.print(" ; ");
@@ -171,6 +176,11 @@ void loop() {
  gyro.read(); //wertet die Daten des Gyroskops aus
  orient.read();
  accel_mag = sqrt(accel.x*accel.x+accel.y*accel.y+accel.z*accel.z);
+
+ if(accel_mag > accel_max) //gibt die bis zum jetzigen Zeitpunkt maximale Geschwindigkeit aus
+ {
+  accel_max = accel_mag;
+ }
  
 //Berechnet den Betrag der Gesamtbeschleunigung
  Serial.print(accel.x);
@@ -180,6 +190,8 @@ void loop() {
  Serial.print(accel.z);
  Serial.print("\t\t");
  Serial.print(accel_mag);
+ Serial.print("\t\t");
+ Serial.print(accel_max);
  Serial.print("\t\t");
  Serial.print(gyro.x);
  Serial.print("\t\t");
@@ -213,6 +225,8 @@ myFile = SD.open("MWERTE.csv", FILE_WRITE);
    myFile.print(accel.z);
    myFile.print(" ; ");
    myFile.print(accel_mag);
+   myFile.print(" ; ");
+   myFile.print(accel_max);
    myFile.print(" ; ");
    myFile.print(gyro.x);
    myFile.print(" ; ");
