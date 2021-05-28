@@ -177,7 +177,7 @@ void loop() {
  orient.read();
  accel_mag = sqrt(accel.x*accel.x+accel.y*accel.y+accel.z*accel.z);
 
- if(accel_mag > accel_max) //gibt die bis zum jetzigen Zeitpunkt maximale Geschwindigkeit aus
+ if(accel_mag > accel_max) //gibt die bis zum jetzigen Zeitpunkt maximale Beschleunigung aus
  {
   accel_max = accel_mag;
  }
